@@ -2,30 +2,26 @@ class Game {
   constructor() {
     this.background = new Background();
     this.map1 = new Map();
-    this.player1 = new Player(0, 0);
+    this.player1 = new Player(1, 1);
 
-    this.zombie1 = new Zombie(2, 2, 1);
-    this.zombie2 = new Zombie(4, 1, 2);
-    this.zombie3 = new Zombie(6, 0, 3);
-    this.zombie4 = new Zombie(8, 3, 4);
+    this.zombie1 = new Zombie(12, 1, 1);
+    this.zombie2 = new Zombie(6, 2, 2);
+    this.zombie3 = new Zombie(14, 2, 3);
+    this.zombie4 = new Zombie(2, 3, 4);
     this.zombie5 = new Zombie(9, 3, 5);
-    this.zombie6 = new Zombie(10, 1, 6);
-    this.zombie7 = new Zombie(12, 2, 7);
+    this.zombie6 = new Zombie(7, 5, 6);
+    this.zombie7 = new Zombie(13, 5, 7);
+    this.zombie8 = new Zombie(12, 9, 8);
+    this.zombie9 = new Zombie(10, 6, 9);
+    this.zombie10 = new Zombie(5, 6, 10);
+    this.zombie11 = new Zombie(0, 8, 11);
+    this.zombie12 = new Zombie(8, 8, 12);
+    this.zombie13 = new Zombie(14, 9, 13);
+    this.zombie14 = new Zombie(2, 10, 14);
+    this.zombie15 = new Zombie(10, 10, 15);
 
-    this.zombie8 = new Zombie(2, 4, 8);
-    this.zombie9 = new Zombie(11, 4, 9);
-    this.zombie10 = new Zombie(4, 5, 10);
-    this.zombie11 = new Zombie(8, 5, 11);
-    this.zombie12 = new Zombie(1, 6, 12);
-    this.zombie13 = new Zombie(10, 6, 13);
-    this.zombie14 = new Zombie(6, 7, 14);
-    this.zombie15 = new Zombie(12, 7, 15);
-
-    this.zombie16 = new Zombie(1, 10, 16);
-    this.zombie17 = new Zombie(4, 9, 17);
-    this.zombie18 = new Zombie(7, 10, 18);
-    this.zombie19 = new Zombie(10, 9, 19);
-    this.zombie20 = new Zombie(13, 10, 20);
+    this.zombie16 = new Zombie(6, 11, 16);
+    this.zombie17 = new Zombie(13, 11, 17);
 
     this.zombiesPositions = [];
   }
@@ -56,9 +52,6 @@ class Game {
 
     this.zombie16.preload();
     this.zombie17.preload();
-    this.zombie18.preload();
-    this.zombie19.preload();
-    this.zombie20.preload();
   }
 
   setup() {
@@ -84,9 +77,6 @@ class Game {
 
     this.zombie16.setup();
     this.zombie17.setup();
-    this.zombie18.setup();
-    this.zombie19.setup();
-    this.zombie20.setup();
   }
 
   draw() {
@@ -115,9 +105,6 @@ class Game {
 
     this.zombie16.draw();
     this.zombie17.draw();
-    this.zombie18.draw();
-    this.zombie19.draw();
-    this.zombie20.draw();
 
     if (this.player1.moves === 0) {
       this.zombie1.move();
@@ -139,9 +126,6 @@ class Game {
 
       this.zombie16.move();
       this.zombie17.move();
-      this.zombie18.move();
-      this.zombie19.move();
-      this.zombie20.move();
       this.player1.moves = 3;
     }
   }

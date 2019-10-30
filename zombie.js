@@ -73,7 +73,6 @@ class Zombie {
 
     for (let i = 0; i < game.zombiesPositions.length; i++) {
       if (this.num !== game.zombiesPositions[i][2]) {
-        console.log(i);
         if (
           zombieX === game.zombiesPositions[i][0] &&
           zombieY === game.zombiesPositions[i][1]
@@ -119,9 +118,6 @@ class Zombie {
     if (this.col === game.player1.col && this.row === game.player1.row) {
       console.log("ok");
     }
-
-    // this.x1 = this.x1 + (this.col - this.x1) * 0.05;
-    // image(zombieFrame, this.x1, this.row - 2, 70, 65);
 
     if (frameCount % 10 === 0) {
       this.frameCounter = this.frameCounter + 2;
