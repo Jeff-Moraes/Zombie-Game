@@ -155,23 +155,23 @@ class Game {
         this.player1.moves = 3;
       }
     } else if (this.gameLevel === 2) {
-      console.log("win");
+      // win
       clear();
       image(this.bgSurvived, 0, 0);
+      this.player1.draw();
     } else if (this.gameLevel === 1000) {
-      console.log("wasted");
+      // wasted
       tint(255, 20);
       image(this.bgWasted, 0, 0);
-      if (keyCode === 32) {
-        this.gameLevel = 1;
-        this.setup();
-      }
     }
   }
 }
 
 function keyPressed() {
-  if (keyCode === 32) {
+  if (keyCode === 32 && game.gameLevel === 0) {
+    game.gameLevel = 1;
+  }
+  if (keyCode === 32 && game.gameLevel === 1000) {
     game.gameLevel = 1;
   }
   let squareSize = 70;

@@ -18,6 +18,7 @@ class Player {
 
     this.playerStopedFrames = [];
     this.playerRunFrames = [];
+    this.playerWinFrames = [];
     this.frameCounter = 0;
   }
 
@@ -65,6 +66,19 @@ class Player {
     this.playerRunFrames.push(loadImage("assets/player/Run-10.png"));
     this.playerRunFrames.push(loadImage("assets/player/Run-11.png"));
     this.playerRunFrames.push(loadImage("assets/player/Run-12.png"));
+
+    this.playerWinFrames.push(loadImage("assets/player/slashing-1.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-2.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-3.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-4.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-5.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-6.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-7.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-8.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-9.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-10.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-11.png"));
+    this.playerWinFrames.push(loadImage("assets/player/slashing-12.png"));
   }
 
   setup() {
@@ -93,6 +107,7 @@ class Player {
   }
   draw() {
     if (game.gameLevel === 0) {
+      // game start
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 2;
       }
@@ -105,7 +120,18 @@ class Player {
       } else {
         this.x1Start = -200;
       }
+    } else if (game.gameLevel === 2) {
+      // game win
+      console.log(game.gameLevel);
+      if (frameCount % 10 === 0) {
+        this.frameCounter = this.frameCounter + 1;
+      }
+      const playerFrame = this.playerWinFrames[
+        this.frameCounter % this.playerWinFrames.length
+      ];
+      image(playerFrame, 350, 150, 300, 300);
     } else {
+      // game
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 2;
       }
