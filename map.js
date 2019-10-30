@@ -1,16 +1,8 @@
 class Map {
-  constructor() {
-    // this.map;
-  }
-  preload() {
-    this.wallTop = loadImage("assets/walls-top.png");
-  }
-  setup() {
-    // this.map = createMap(map1);
-  }
-  draw() {
-    // createMap(map1);
-  }
+  constructor() {}
+  preload() {}
+  setup() {}
+  draw() {}
 }
 
 const map1 = [
