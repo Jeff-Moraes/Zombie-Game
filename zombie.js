@@ -137,7 +137,7 @@ class Zombie {
       }
 
       if (frameCount % 10 === 0) {
-        this.frameCounter = this.frameCounter + 2;
+        this.frameCounter = this.frameCounter + 1;
       }
 
       if (this.x1 === this.col && this.y1 === this.row) {
@@ -154,16 +154,16 @@ class Zombie {
       }
 
       if (this.x1 < this.col) {
-        this.x1 += 2;
+        this.x1 += 1;
       }
       if (this.y1 < this.row) {
-        this.y1 += 2;
+        this.y1 += 1;
       }
       if (this.x1 > this.col) {
-        this.x1 -= 2;
+        this.x1 -= 1;
       }
       if (this.y1 > this.row) {
-        this.y1 -= 2;
+        this.y1 -= 1;
       }
     }
   }
