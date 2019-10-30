@@ -29,6 +29,9 @@ class Player {
     this.playerStopedFrames.push(loadImage("assets/player/Idle-13.png"));
     this.playerStopedFrames.push(loadImage("assets/player/Idle-14.png"));
     this.playerStopedFrames.push(loadImage("assets/player/Idle-15.png"));
+    this.playerStopedFrames.push(loadImage("assets/player/Idle-16.png"));
+    this.playerStopedFrames.push(loadImage("assets/player/Idle-17.png"));
+    this.playerStopedFrames.push(loadImage("assets/player/Idle-18.png"));
   }
 
   setup() {
@@ -61,6 +64,6 @@ class Player {
         (this.frameCounter + 1) % this.playerStopedFrames.length;
     }
     const playerFrame = this.playerStopedFrames[this.frameCounter];
-    image(playerFrame, this.col, this.row, 80, 70);
+    image(playerFrame, this.col - 10, this.row - 15, 100, 100);
   }
 }

@@ -30,23 +30,27 @@ class Zombie {
     this.zombieRunFrames.push(loadImage("assets/zombie/Run8.png"));
     this.zombieRunFrames.push(loadImage("assets/zombie/Run9.png"));
     this.zombieRunFrames.push(loadImage("assets/zombie/Run10.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run9.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run8.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run7.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run6.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run5.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run4.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run3.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run2.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run1.png"));
+    this.zombieRunFrames.push(loadImage("assets/zombie/Run11.png"));
+    this.zombieRunFrames.push(loadImage("assets/zombie/Run12.png"));
 
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle4.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle3.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle2.png"));
     this.zombieStopedFrames.push(loadImage("assets/zombie/Idle1.png"));
     this.zombieStopedFrames.push(loadImage("assets/zombie/Idle2.png"));
     this.zombieStopedFrames.push(loadImage("assets/zombie/Idle3.png"));
     this.zombieStopedFrames.push(loadImage("assets/zombie/Idle4.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle5.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle6.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle7.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle8.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle9.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle10.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle11.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle12.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle13.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle14.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle15.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle16.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle17.png"));
+    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle18.png"));
   }
 
   collides(direction) {
@@ -120,7 +124,7 @@ class Zombie {
     // image(zombieFrame, this.x1, this.row - 2, 70, 65);
 
     if (frameCount % 10 === 0) {
-      this.frameCounter = this.frameCounter + 1;
+      this.frameCounter = this.frameCounter + 2;
     }
 
     if (this.x1 === this.col && this.y1 === this.row) {
@@ -128,12 +132,12 @@ class Zombie {
         this.frameCounter % this.zombieStopedFrames.length
       ];
 
-      image(zombieIdle, this.x1, this.y1 - 2, 70, 65);
+      image(zombieIdle, this.x1 - 15, this.y1 - 15, 100, 100);
     } else {
       const zombieFrame = this.zombieRunFrames[
         this.frameCounter % this.zombieRunFrames.length
       ];
-      image(zombieFrame, this.x1, this.y1, 70, 65);
+      image(zombieFrame, this.x1 - 15, this.y1 - 15, 100, 100);
     }
 
     if (this.x1 < this.col) {
