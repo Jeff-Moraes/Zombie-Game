@@ -46,7 +46,6 @@ class Game {
     this.zombie5.preload();
     this.zombie6.preload();
     this.zombie7.preload();
-
     this.zombie8.preload();
     this.zombie9.preload();
     this.zombie10.preload();
@@ -55,9 +54,12 @@ class Game {
     this.zombie13.preload();
     this.zombie14.preload();
     this.zombie15.preload();
-
     this.zombie16.preload();
     this.zombie17.preload();
+
+    soundFormats("mp3");
+    this.gameMusic = loadSound("assets/game-music.mp3");
+    this.zombieMove = loadSound("assets/little-zombie.mp3");
   }
 
   setup() {
@@ -71,7 +73,6 @@ class Game {
     this.zombie5.setup();
     this.zombie6.setup();
     this.zombie7.setup();
-
     this.zombie8.setup();
     this.zombie9.setup();
     this.zombie10.setup();
@@ -80,9 +81,12 @@ class Game {
     this.zombie13.setup();
     this.zombie14.setup();
     this.zombie15.setup();
-
     this.zombie16.setup();
     this.zombie17.setup();
+
+    this.gameMusic.setVolume(0.2);
+    this.gameMusic.loop();
+    this.gameMusic.play();
   }
 
   draw() {
@@ -125,6 +129,9 @@ class Game {
       }
 
       if (this.player1.moves === 0) {
+        this.zombieMove.setVolume(0.1);
+        this.zombieMove.play();
+
         this.zombie1.move();
         this.zombie2.move();
         this.zombie3.move();
