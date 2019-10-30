@@ -1,7 +1,7 @@
 class Zombie {
   constructor(x, y, num) {
     this.num = num;
-    this.row = y * gridSquare;
+    this.row = y * gridSquare - 10;
     this.col = x * gridSquare;
     this.x = x;
     this.y = y;
@@ -9,6 +9,9 @@ class Zombie {
 
     this.x1 = this.col;
     this.y1 = this.row;
+
+    this.x1Start = -700;
+    this.y1Start = 100;
 
     this.zombieRunFrames = [];
     this.zombieStopedFrames = [];
@@ -115,38 +118,53 @@ class Zombie {
   }
 
   draw() {
-    if (this.col === game.player1.col && this.row === game.player1.row) {
-      console.log("ok");
-    }
-
-    if (frameCount % 10 === 0) {
-      this.frameCounter = this.frameCounter + 2;
-    }
-
-    if (this.x1 === this.col && this.y1 === this.row) {
-      const zombieIdle = this.zombieStopedFrames[
-        this.frameCounter % this.zombieStopedFrames.length
-      ];
-
-      image(zombieIdle, this.x1 - 15, this.y1 - 15, 100, 100);
-    } else {
+    if (game.gameLevel === 0) {
+      if (frameCount % 10 === 0) {
+        this.frameCounter = this.frameCounter + 3;
+      }
       const zombieFrame = this.zombieRunFrames[
         this.frameCounter % this.zombieRunFrames.length
       ];
-      image(zombieFrame, this.x1 - 15, this.y1 - 15, 100, 100);
-    }
+      image(zombieFrame, this.x1Start, this.y1Start, 300, 300);
+      if (this.x1Start < width) {
+        this.x1Start += 5;
+      } else {
+        this.x1Start = -700;
+      }
+    } else {
+      if (this.col === game.player1.col && this.row === game.player1.row) {
+        game.player1.playerDied();
+      }
 
-    if (this.x1 < this.col) {
-      this.x1 += 2;
-    }
-    if (this.y1 < this.row) {
-      this.y1 += 2;
-    }
-    if (this.x1 > this.col) {
-      this.x1 -= 2;
-    }
-    if (this.y1 > this.row) {
-      this.y1 -= 2;
+      if (frameCount % 10 === 0) {
+        this.frameCounter = this.frameCounter + 2;
+      }
+
+      if (this.x1 === this.col && this.y1 === this.row) {
+        const zombieIdle = this.zombieStopedFrames[
+          this.frameCounter % this.zombieStopedFrames.length
+        ];
+
+        image(zombieIdle, this.x1 - 15, this.y1 - 15, 100, 100);
+      } else {
+        const zombieFrame = this.zombieRunFrames[
+          this.frameCounter % this.zombieRunFrames.length
+        ];
+        image(zombieFrame, this.x1 - 15, this.y1 - 15, 100, 100);
+      }
+
+      if (this.x1 < this.col) {
+        this.x1 += 2;
+      }
+      if (this.y1 < this.row) {
+        this.y1 += 2;
+      }
+      if (this.x1 > this.col) {
+        this.x1 -= 2;
+      }
+      if (this.y1 > this.row) {
+        this.y1 -= 2;
+      }
     }
   }
 }
