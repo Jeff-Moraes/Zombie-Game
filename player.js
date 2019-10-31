@@ -16,10 +16,19 @@ class Player {
     this.x1Start = -200;
     this.y1Start = 100;
 
-    this.playerStopedFrames = [];
-    this.playerRunFrames = [];
-    this.playerWinFrames = [];
+    this.playerStopedFrames = playerStopedFrames;
+    this.playerRunFrames = playerRunFrames;
+    this.playerWinFrames = playerWinFrames;
     this.frameCounter = 0;
+  }
+
+  resetPostion(resetX, resetY) {
+    this.x = resetX;
+    this.y = resetY;
+
+    this.row = resetX * gridSquare - 10;
+    this.col = resetY * gridSquare;
+    this.newPosition();
   }
 
   newMoves() {
@@ -28,61 +37,8 @@ class Player {
     }, 800);
   }
 
-  playerDied() {
-    setTimeout(() => {
-      game.gameLevel = 1000;
-    }, 1000);
-  }
-
-  preload() {
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-1.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-2.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-3.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-4.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-5.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-6.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-7.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-8.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-9.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-10.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-11.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-12.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-13.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-14.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-15.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-16.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-17.png"));
-    this.playerStopedFrames.push(loadImage("assets/player/Idle-18.png"));
-
-    this.playerRunFrames.push(loadImage("assets/player/Run-1.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-2.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-3.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-4.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-5.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-6.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-7.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-8.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-9.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-10.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-11.png"));
-    this.playerRunFrames.push(loadImage("assets/player/Run-12.png"));
-
-    this.playerWinFrames.push(loadImage("assets/player/slashing-1.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-2.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-3.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-4.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-5.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-6.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-7.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-8.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-9.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-10.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-11.png"));
-    this.playerWinFrames.push(loadImage("assets/player/slashing-12.png"));
-  }
-
-  setup() {
-    this.position = map1[this.y][this.x];
+  newPosition() {
+    this.position = map[this.y][this.x];
   }
 
   moveUp() {
@@ -122,7 +78,6 @@ class Player {
       }
     } else if (game.gameLevel === 2) {
       // game win
-      console.log(game.gameLevel);
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 1;
       }
@@ -130,7 +85,10 @@ class Player {
         this.frameCounter % this.playerWinFrames.length
       ];
       image(playerFrame, 350, 150, 300, 300);
-    } else {
+    } else if (game.gameLevel === 1000) {
+      this.col = 70;
+      this.row = 70;
+    } else if (game.gameLevel === 1) {
       // game
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 2;
@@ -162,11 +120,5 @@ class Player {
         this.y1 -= 2;
       }
     }
-    // if (frameCount % 10 === 0) {
-    //   this.frameCounter =
-    //     (this.frameCounter + 1) % this.playerStopedFrames.length;
-    // }
-    // const playerFrame = this.playerStopedFrames[this.frameCounter];
-    // image(playerFrame, this.col - 10, this.row - 15, 100, 100);
   }
 }
