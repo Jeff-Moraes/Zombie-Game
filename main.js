@@ -1,14 +1,12 @@
 const game = new Game();
 
-function preload() {
-  game.preload();
-}
-
 function setup() {
   createCanvas(1050, 840);
-  game.setup();
-}
 
+  gameMusic.setVolume(0.2);
+  gameMusic.loop();
+  gameMusic.play();
+}
 function draw() {
   game.draw();
 }

@@ -13,47 +13,22 @@ class Zombie {
     this.x1Start = -700;
     this.y1Start = 100;
 
-    this.zombieRunFrames = [];
-    this.zombieStopedFrames = [];
+    this.zombieRunFrames = zombieRunFrames;
+    this.zombieStopedFrames = zombieStopedFrames;
     this.frameCounter = 0;
   }
-  setup() {
-    this.position = map1[this.y][this.x];
+
+  resetPostion(resetX, resetY) {
+    this.x = resetX;
+    this.y = resetY;
+
+    this.row = resetY * gridSquare - 10;
+    this.col = resetX * gridSquare;
+    this.preload();
   }
 
   preload() {
     game.zombiesPositions.push([this.x, this.y, this.num]);
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run1.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run2.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run3.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run4.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run5.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run6.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run7.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run8.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run9.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run10.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run11.png"));
-    this.zombieRunFrames.push(loadImage("assets/zombie/Run12.png"));
-
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle1.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle2.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle3.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle4.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle5.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle6.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle7.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle8.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle9.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle10.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle11.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle12.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle13.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle14.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle15.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle16.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle17.png"));
-    this.zombieStopedFrames.push(loadImage("assets/zombie/Idle18.png"));
   }
 
   collides(direction) {
@@ -87,6 +62,8 @@ class Zombie {
   }
 
   move() {
+    this.position = map[this.y][this.x];
+
     if (this.x < game.player1.x && !this.position.includes(4)) {
       if (!this.collides("right")) {
         this.x++;
@@ -108,7 +85,7 @@ class Zombie {
         this.row += gridSquare;
       }
     }
-    this.setup();
+    this.position = map[this.y][this.x];
     for (let i = 0; i < game.zombiesPositions.length; i++) {
       if (this.num === game.zombiesPositions[i][2]) {
         game.zombiesPositions[i][0] = this.x;
@@ -132,9 +109,9 @@ class Zombie {
         this.x1Start = -700;
       }
     } else {
-      if (this.col === game.player1.col && this.row === game.player1.row) {
-        game.player1.playerDied();
-      }
+      // if (this.col === game.player1.col && this.row === game.player1.row) {
+      //   game.player1.playerDied();
+      // }
 
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 1;
@@ -165,6 +142,15 @@ class Zombie {
       if (this.y1 > this.row) {
         this.y1 -= 1;
       }
+    }
+    if (
+      game.gameLevel === 1 &&
+      this.col === game.player1.col &&
+      this.row === game.player1.row
+    ) {
+      setTimeout(() => {
+        game.gameLevel = 1000;
+      }, 600);
     }
   }
 }
