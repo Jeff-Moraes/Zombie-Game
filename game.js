@@ -2,7 +2,7 @@ class Game {
   constructor() {
     this.player1 = new Player(1, 1);
 
-    this.zombies = zombiesArr.map((el, index) => {
+    this.zombies = zombiesArr.map(el => {
       return new Zombie(...el);
     });
 
@@ -15,15 +15,18 @@ class Game {
     for (let i = 0; i < this.zombies.length; i++) {
       this.zombies[i].resetPostion(zombiesArr[i][0], zombiesArr[i][1]);
     }
-    console.log("new position after death", this.player1.col, this.player1.row);
   }
 
   draw() {
     if (this.gameLevel === 0) {
+      push();
       image(bgStart2, 0, 0);
       this.player1.draw();
       this.zombies[0].draw();
+      pop();
     } else if (this.gameLevel === 1) {
+      push();
+
       image(bg, 0, 0);
       this.player1.draw();
 
@@ -45,23 +48,25 @@ class Game {
         for (let i = 0; i < this.zombies.length; i++) {
           this.zombies[i].move();
         }
-
         this.player1.moves = 3;
       }
+      if (!this.player1.aLife) {
+        this.gameLevel = 1000;
+      }
+      pop();
     } else if (this.gameLevel === 2) {
       // win
-      clear();
+      push();
       image(bgSurvived, 0, 0);
+      pop();
+
       this.player1.draw();
-      this.resetCharactersPositions();
     } else if (this.gameLevel === 1000) {
       // wasted
       push();
       tint(255, 20);
       image(bgWasted, 0, 0);
       pop();
-
-      this.resetCharactersPositions();
     }
   }
 }
@@ -71,9 +76,11 @@ function keyPressed() {
     game.gameLevel = 1;
   }
   if (keyCode === 32 && game.gameLevel === 2) {
+    game.resetCharactersPositions();
     game.gameLevel = 1;
   }
   if (keyCode === 32 && game.gameLevel === 1000) {
+    game.resetCharactersPositions();
     game.gameLevel = 1;
   }
   let squareSize = 70;

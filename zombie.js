@@ -24,6 +24,9 @@ class Zombie {
 
     this.row = resetY * gridSquare - 10;
     this.col = resetX * gridSquare;
+
+    this.x1 = this.col;
+    this.y1 = this.row;
     this.preload();
   }
 
@@ -108,11 +111,7 @@ class Zombie {
       } else {
         this.x1Start = -700;
       }
-    } else {
-      // if (this.col === game.player1.col && this.row === game.player1.row) {
-      //   game.player1.playerDied();
-      // }
-
+    } else if (game.gameLevel === 1 && game.player1.aLife === true) {
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 1;
       }
@@ -128,28 +127,28 @@ class Zombie {
           this.frameCounter % this.zombieRunFrames.length
         ];
         image(zombieFrame, this.x1 - 15, this.y1 - 15, 100, 100);
-      }
-
-      if (this.x1 < this.col) {
-        this.x1 += 1;
-      }
-      if (this.y1 < this.row) {
-        this.y1 += 1;
-      }
-      if (this.x1 > this.col) {
-        this.x1 -= 1;
-      }
-      if (this.y1 > this.row) {
-        this.y1 -= 1;
+        if (this.x1 < this.col) {
+          this.x1 += 1;
+        }
+        if (this.y1 < this.row) {
+          this.y1 += 1;
+        }
+        if (this.x1 > this.col) {
+          this.x1 -= 1;
+        }
+        if (this.y1 > this.row) {
+          this.y1 -= 1;
+        }
       }
     }
+
     if (
       game.gameLevel === 1 &&
       this.col === game.player1.col &&
       this.row === game.player1.row
     ) {
       setTimeout(() => {
-        game.gameLevel = 1000;
+        game.player1.aLife = false;
       }, 600);
     }
   }
