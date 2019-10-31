@@ -15,6 +15,8 @@ let playerWinFrames = [];
 
 let map;
 
+let gridSquare = 70;
+
 function preload() {
   bg = loadImage("assets/background.png");
   bgSurvived = loadImage("assets/bg-survived.png");

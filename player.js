@@ -1,5 +1,3 @@
-let gridSquare = 70;
-
 class Player {
   constructor(x, y) {
     this.row = y * gridSquare - 10;
@@ -9,6 +7,7 @@ class Player {
     this.position = {};
     this.moves = 3;
     this.canMove = true;
+    this.aLife = true;
 
     this.x1 = this.col;
     this.y1 = this.row;
@@ -28,6 +27,11 @@ class Player {
 
     this.row = resetX * gridSquare - 10;
     this.col = resetY * gridSquare;
+
+    this.x1 = this.col;
+    this.y1 = this.row;
+    this.aLife = true;
+    this.moves = 3;
     this.newPosition();
   }
 
@@ -85,10 +89,7 @@ class Player {
         this.frameCounter % this.playerWinFrames.length
       ];
       image(playerFrame, 350, 150, 300, 300);
-    } else if (game.gameLevel === 1000) {
-      this.col = 70;
-      this.row = 70;
-    } else if (game.gameLevel === 1) {
+    } else if (game.gameLevel === 1 && this.aLife === true) {
       // game
       if (frameCount % 10 === 0) {
         this.frameCounter = this.frameCounter + 2;
@@ -100,24 +101,24 @@ class Player {
         ];
 
         image(playerFrame, this.x1 - 15, this.y1 - 15, 100, 100);
-      } else {
+      } else if (game.gameLevel === 1 && !this.canMove) {
         const playerFrame = this.playerRunFrames[
           this.frameCounter % this.playerRunFrames.length
         ];
         image(playerFrame, this.x1 - 15, this.y1 - 15, 100, 100);
-      }
 
-      if (this.x1 < this.col) {
-        this.x1 += 2;
-      }
-      if (this.y1 < this.row) {
-        this.y1 += 2;
-      }
-      if (this.x1 > this.col) {
-        this.x1 -= 2;
-      }
-      if (this.y1 > this.row) {
-        this.y1 -= 2;
+        if (this.x1 < this.col) {
+          this.x1 += 2;
+        }
+        if (this.y1 < this.row) {
+          this.y1 += 2;
+        }
+        if (this.x1 > this.col) {
+          this.x1 -= 2;
+        }
+        if (this.y1 > this.row) {
+          this.y1 -= 2;
+        }
       }
     }
   }
