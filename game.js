@@ -63,10 +63,9 @@ class Game {
       this.player1.draw();
     } else if (this.gameLevel === 1000) {
       // wasted
-      push();
       tint(255, 20);
       image(bgWasted, 0, 0);
-      pop();
+      noTint();
     }
   }
 }
